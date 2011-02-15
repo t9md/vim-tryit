@@ -16,10 +16,11 @@ Usage
 -----------------------------------------------------------------
     :TryIt rb<CR>
     :TryIT<CR>
+    :'<,'>TryItSelection<CR>
 
 Keymap Example
 -----------------------------------------------------------------
      let mapleader = ","
      nnoremap <silent> <Leader>T  :TryIt 
      nnoremap <silent> <Leader>t  :TryIt<CR>
-     vnoremap <silent> <Leader>t  :TryIt<CR>
+     vnoremap <silent> <Leader>t  :TryItSelection<CR>

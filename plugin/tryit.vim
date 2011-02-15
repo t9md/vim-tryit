@@ -9,7 +9,6 @@
 let s:old_cpo = &cpo
 set cpo&vim
 
-
 " Main
 "=================================================================
 let s:ft_ext_dict = {
@@ -19,7 +18,7 @@ let s:ft_ext_dict = {
             \ 'javascript': 'js',
             \ }
 
-function! g:TryIt(...) range
+function! g:TryIt(mode, ...) range
     unlet! ext
     " try determine ext
     let query = !empty(a:1) ? a:1 :
@@ -30,9 +29,19 @@ function! g:TryIt(...) range
     let base = "scratch"
     let fname = s:determineFileName(base, query)
     belowright split
-    execute "edit " . g:tryit_dir . "/" . fname
-endfunction
 
+    if a:mode == 'v'
+	let selection = getline(a:firstline, a:lastline)
+    endif
+
+    execute "edit " . g:tryit_dir . "/" . fname
+
+    if a:mode == 'v'
+	call append(0, selection)
+	let cmd = "normal! ggV".(len(selection)-1)."jo"
+	execute cmd
+    endif
+endfunction
 
 function! s:determineFileName(base, query)
     let ext   = get(s:ft_ext_dict, a:query, a:query)
@@ -42,7 +51,8 @@ endfunction
 
 " Create command
 "=================================================================
-command! -nargs=? -range TryIt :<line1>,<line2>call g:TryIt(<q-args>)
+command! -nargs=? -range TryIt :call g:TryIt('n',<q-args>)
+command! -nargs=? -range TryItSelection :<line1>,<line2>call g:TryIt('v',<q-args>)
 
 let &cpo = s:old_cpo
 
