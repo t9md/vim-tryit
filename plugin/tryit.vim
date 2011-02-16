@@ -26,7 +26,7 @@ function! g:TryIt(mode, ...) range
                 \ &ft :
                 \ input("Filetype: ")
 
-    let base = "scratch"
+    let base = "tryit"
     let fname = s:determineFileName(base, query)
     belowright split
 
