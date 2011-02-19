@@ -28,19 +28,33 @@ function! g:TryIt(mode, ...) range
 
     let base = "tryit"
     let fname = s:determineFileName(base, query)
-    belowright split
 
     if a:mode == 'v'
-	let selection = getline(a:firstline, a:lastline)
+        let selection = getline(a:firstline, a:lastline)
     endif
 
-    execute "edit " . g:tryit_dir . "/" . fname
+    let tryit_file = g:tryit_dir . "/" . fname
+    if s:select_bufferwin(tryit_file) == -1
+        " if s:select_bufferwin(fnamemodify(tryit_file, ':t')) == -1
+        execute 'belowright split ' . tryit_file
+    endif
 
     if a:mode == 'v'
-	call append(0, selection)
-	let cmd = "normal! ggV".(len(selection)-1)."jo"
-	execute cmd
+        call append(0, selection)
+        let cmd = "normal! ggV".(len(selection)-1)."jo"
+        execute cmd
     endif
+endfunction
+
+function! s:select_bufferwin(bufname)
+    let expanded = expand(a:bufname)
+    let canonical_bufname = fnamemodify(expanded, ':p:~')
+    let winno = bufwinnr(canonical_bufname)
+    if winno != -1
+        execute winno . ':wincmd w'
+    endif
+    " echo winno
+    return winno
 endfunction
 
 function! s:determineFileName(base, query)
