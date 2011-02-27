@@ -34,6 +34,7 @@ function! g:TryIt(mode, ...) range
     endif
 
     let tryit_file = g:tryit_dir . "/" . fname
+    let tryit_file = expand(tryit_file)
     if s:select_bufferwin(tryit_file) == -1
         " if s:select_bufferwin(fnamemodify(tryit_file, ':t')) == -1
         execute 'belowright split ' . tryit_file
@@ -47,9 +48,7 @@ function! g:TryIt(mode, ...) range
 endfunction
 
 function! s:select_bufferwin(bufname)
-    let expanded = expand(a:bufname)
-    let canonical_bufname = fnamemodify(expanded, ':p:~')
-    let winno = bufwinnr(canonical_bufname)
+    let winno = bufwinnr(a:bufname)
     if winno != -1
         execute winno . ':wincmd w'
     endif
