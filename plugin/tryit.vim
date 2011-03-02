@@ -47,6 +47,14 @@ function! g:TryIt(mode, ...) range
     endif
 endfunction
 
+function! g:TryItInteractive()
+  echohl Function
+  let type = input("TryIt: ")
+  echohl Normal
+  if empty(type) | return | end
+  execute "TryIt " . type
+endfunction
+
 function! s:select_bufferwin(bufname)
     let winno = bufwinnr(a:bufname)
     if winno != -1
@@ -66,6 +74,7 @@ endfunction
 "=================================================================
 command! -nargs=? -range TryIt :call g:TryIt('n',<q-args>)
 command! -nargs=? -range TryItSelection :<line1>,<line2>call g:TryIt('v',<q-args>)
+command! -nargs=? -range TryItInteractive :call g:TryItInteractive()
 
 let &cpo = s:old_cpo
 
