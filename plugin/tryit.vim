@@ -14,6 +14,7 @@ set cpo&vim
 let s:ft_ext_dict = {
             \ 'perl': 'pl',
             \ 'ruby': 'rb',
+            \ 'puppet': 'pp',
             \ 'python': 'py',
             \ 'javascript': 'js',
             \ }
