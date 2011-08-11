@@ -77,7 +77,5 @@ command! -nargs=? -range TryIt :call g:TryIt('n',<q-args>)
 command! -nargs=? -range TryItSelection :<line1>,<line2>call g:TryIt('v',<q-args>)
 command! -nargs=? -range TryItInteractive :call g:TryItInteractive()
 
-let &cpo = s:old_cpo
-
 "reset &cpo back to users setting
 let &cpo = s:old_cpo
