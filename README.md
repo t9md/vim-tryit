@@ -14,13 +14,14 @@ Setting
 
 Usage
 -----------------------------------------------------------------
-    :TryIt rb<CR>
-    :TryIT<CR>
-    :'<,'>TryItSelection<CR>
+    :Tryit rb<CR>
+    :Tryit<CR>
+    :'<,'>Tryit<CR>
 
-Keymap Example
+Configuration
 -----------------------------------------------------------------
-     let mapleader = ","
-     nnoremap <silent> <Leader>T  :TryIt 
-     nnoremap <silent> <Leader>t  :TryIt<CR>
-     vnoremap <silent> <Leader>t  :TryItSelection<CR>
+    let g:tryit_dir = "$HOME/.vim/tryit"
+    nmap  T <Plug>(tryit-this)
+    xmap  T <Plug>(tryit-this)
+    nmap  <Space>t <Plug>(tryit-ask)
+    xmap  <Space>t <Plug>(tryit-ask)
