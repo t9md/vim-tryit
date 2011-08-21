@@ -329,10 +329,11 @@ function! s:select_or_edit(path) "{{{
 endfunction "}}}
 
 function! s:mkdir(dir)
-  if !isdirectory(a:dir)
-    let answer = input("create " . a:dir . "?[y/n] ")
+  let dir = expand(a:dir)
+  if !isdirectory(dir)
+    let answer = input("create " . dir . "?[y/n] ")
     if answer == 'y'
-      call mkdir(expand(a:dir), "p")
+      call mkdir(dir, "p")
     else
       return -1
     endif
