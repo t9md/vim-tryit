@@ -10,25 +10,27 @@
 if exists('g:tryit_dev')
   unlet! g:loaded_tryit
 endif
-
-if !exists('g:tryit_debug')
-  let g:tryit_debug = 0
-endif
-
 if exists('g:loaded_tryit')
   finish
 endif
 let g:loaded_tryit = 1
 
+let s:old_cpo = &cpo
+set cpo&vim
+" }}}
+
+
+" Variable: {{{
+"============================================================
 if !exists("g:tryit_dir")
   let g:tryit_dir = "$HOME/.vim/tryit"
+endif
+if !exists('g:tryit_debug')
+  let g:tryit_debug = 0
 endif
 if !exists("g:tryit_ft_tbl")
   let g:tryit_ft_tbl = {}
 endif
-
-let s:old_cpo = &cpo
-set cpo&vim
 "}}}
 
 " Keymap: {{{
