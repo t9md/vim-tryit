@@ -305,7 +305,7 @@ function! s:ft_info.init() "{{{
     let [ft, ext; cmt] =  split(ent,'  \+') " separate with *two* or more space
     let tbl[ft] = { 'ext': ext, 'cmt': cmt }
   endfor
-  let self._table = extend(tbl, g:phrase_ft_tbl, "force")
+  let self._table = extend(tbl, g:tryit_ft_tbl, "force")
 endfunction "}}}
 
 function! s:ft_info.get(ft)

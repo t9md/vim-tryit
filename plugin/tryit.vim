@@ -23,6 +23,9 @@ let g:loaded_tryit = 1
 if !exists("g:tryit_dir")
   let g:tryit_dir = "$HOME/.vim/tryit"
 endif
+if !exists("g:tryit_ft_tbl")
+  let g:tryit_ft_tbl = {}
+endif
 
 let s:old_cpo = &cpo
 set cpo&vim
