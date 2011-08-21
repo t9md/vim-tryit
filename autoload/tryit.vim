@@ -327,11 +327,24 @@ function! s:select_or_edit(path) "{{{
     silent belowright split `=a:path`
   endif
 endfunction "}}}
+
+function! s:mkdir(dir)
+  if !isdirectory(a:dir)
+    let answer = input("create " . a:dir . "?[y/n] ")
+    if answer == 'y'
+      call mkdir(expand(a:dir), "p")
+    else
+      return -1
+    endif
+  endif
+  return 1
+endfunction
 " }}}
 
 " Public Interface: {{{
 "============================================================
 function! tryit#do(range_given, line1, line2, ...) "{{{
+  if s:mkdir(g:tryit_dir) == -1 | return | endif
   let selection = getline(a:line1, a:line2)
 
   if a:0 > 0    | let ext = a:1                    | endif
@@ -350,6 +363,7 @@ function! tryit#do(range_given, line1, line2, ...) "{{{
 endfunction "}}}
 
 function! tryit#ask(range_given, line1, line2) "{{{
+  if s:mkdir(g:tryit_dir) == -1 | return | endif
   let ext = input("ext: ")
   if empty(ext)
     return
