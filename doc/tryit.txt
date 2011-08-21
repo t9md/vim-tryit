@@ -1,0 +1,93 @@
+*tryit.txt* Open scratch buffer to try idea.
+						      
+Version: 1.0
+Author : t9md <taqumd@gmail.com>
+GitHub : https://github.com/t9md/vim-tryit
+==============================================================================
+CONTENTS					*tryit-contents*
+
+Introduction				    |tryit-introduction|
+Mapping					    |tryit-mapping|
+Commands				    |tryit-commands|
+Variables				    |tryit-variables|
+Configuration Examples			    |tryit-examples|
+Bug     				    |tryit-bug|
+Changelog				    |tryit-changelog|
+
+==============================================================================
+INTRODUCTION				      	*tryit-introduction*
+
+*tryit.vim* is minimal utility for
+
+  * open scratch(=sandbox) file to try idea in that file.
+  * paste visually selected text to that scrach buffer.
+
+Thats' all!
+
+I need workspace to try some idea when programming.
+
+When I am considering "where to save", "what name should I name this file",
+for this type of file used merly as workspace , I consume limited brain
+resources for that.
+
+I usually use this plugin with combination of thinca's |quickrun|.
+
+quickrun:~
+  http://www.vim.org/scripts/script.php?script_id=3146
+
+while I read some source code, and have question for code fragment.
+
+	1. select that code fragment.
+	2. then `T`( my favorite keymap for <Plug>(tryit-this) )
+	3. then |:Quickrun|.
+
+==============================================================================
+MAPPINGS					*tryit-mappings*
+
+n <Plug>(tryit-this) :Tryit<CR>
+	open tryit buffer for current |&filetype|.
+
+v <Plug>(tryit-this) :Tryit<CR>
+	open tryit buffer for current |&filetype|.
+        And paste visually selected text to that buffer.
+
+
+n <Plug>(tryit-ask)  :TryitAsk<CR>
+	open tryit buffer with asking file's extension.
+
+v <Plug>(tryit-ask)  :TryitAsk<CR>
+	open tryit buffer with asking file's extension.
+        And paste visually selected text to that buffer.
+
+==============================================================================
+COMMANDS						*tryit-commands*
+
+:Tryit			Open tryit buffer.
+:TryitAsk		Open tryit buffer with asking file's extension.
+
+==============================================================================
+VARIABLES						*tryit-variables*
+
+g:tryit_dir
+	directory where each tryit file is saved in.
+        Default~
+        "$HOME/.vim/tryit"
+
+==============================================================================
+CONFIGURATION EXAMPLE					*tryit-examples*
+>
+        let g:tryit_dir = "$HOME/.vim/tryit"
+        nmap  T <Plug>(tryit-this)
+        xmap  T <Plug>(tryit-this)
+        nmap  <Space>t <Plug>(tryit-ask)
+        xmap  <Space>t <Plug>(tryit-ask)
+<
+==============================================================================
+BUG							*tryit-bug*
+
+==============================================================================
+CHANGELOG						*tryit-changelog*
+2011-08-21: v1.0
+	- initial release to vim.org
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
