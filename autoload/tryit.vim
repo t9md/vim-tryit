@@ -309,12 +309,13 @@ function! s:ft_info.init() "{{{
 endfunction "}}}
 
 function! s:ft_info.get(ft)
+  if !has_key(self,"_table")
+    call self.init()
+  endif
   let val = get(self._table, a:ft, {"ext": a:ft , "cmt": ["#"] })
   return val
 endfunction
 " }}}
-
-call s:ft_info.init()
 
 " Utility: {{{
 "============================================================
